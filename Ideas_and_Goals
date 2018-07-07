@@ -2,6 +2,12 @@ Here we will keep all of our ideas for game mechanics, design features, etc.:
 -A modular character (i.e. upgrades to a mech suit are picked up throughout a level)
 -Thinking game features should be something like league, where as the game goes on
  the characters will scale and grow bigger
- 
+
 Here we will keep all goals for the end product (however achievable they may be):
 -Port to C so it is easy to run across platforms
+
+Libraries we will be using:
+    -Possible
+        PyGame
+        Pyglet
+        
