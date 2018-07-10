@@ -3,3 +3,11 @@ Here we will keep all of our ideas for game mechanics, design features, etc.:
 
 Here we will keep all goals for the end product (however achievable they may be):
 -Port to C so it is easy to run across platforms
+
+
+Design Ideas
+-Thinking 2D side scrolling platformer. Been playing Ori and the Blind Forest recently and iz pretty gud
+-Eman seems pretty obsessed with a multiplayer mech mode, so thinking we have something where part of the main method of progression is to use
+different kinds of mechs as the situation requires each level
+	- Maybe for multiplayer competitive (since eman seems equally fixed on that) different mechs drop randomly, or the mechs are like "classes"
+	where one has strengths that exploit the weaknesses of another, and vice versa? Maybe that'd be too hard to balance
