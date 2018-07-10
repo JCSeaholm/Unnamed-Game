@@ -1,5 +1,11 @@
+#pygame is the multimedia library
 import pygame
+#we'll need some math I'm sure
 import numpy
+#sys should make a few things like exiting smoother
+import sys
+#we should put settings in a different file just to keep everything clean
+import settings as s
 
 pygame.init()
 #idk what a python file should look like so yeh
@@ -17,5 +23,5 @@ class aight(object):
 def main():
     pass
 
-pygame.quite()
+pygame.quit()
 quit()
