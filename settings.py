@@ -8,6 +8,7 @@ userSettings = json.load(userSettingsFile)
 #grabs the relevant data from the user input file
 userSetWidth = userSettings["width"]
 userSetHeight = userSettings["height"]
+userSettingsFile.close()
 
 #does the user want to change a setting? Use these.
 def setWidth(width):
