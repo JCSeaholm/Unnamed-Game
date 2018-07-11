@@ -17,11 +17,25 @@ class aight(object):
 
 """functions and variables"""
 
+#Use pygame.FULLSCREEN for fullscreen
+pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
+
+def changeWindowSize(width, height):
+    s.setWidth(width)
+    s.setHeight(height)
+    pygame.display.set_mode((width, height))
 
 """main"""
 
 def main():
-    pass
+    while 1:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
+main()
+
+#we don't need these, but they're there for safety
 pygame.quit()
-quit()
+sys.exit()
