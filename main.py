@@ -8,7 +8,6 @@ import sys
 import settings as s
 
 pygame.init()
-#idk what a python file should look like so yeh kkk
 
 """classes"""
 
@@ -17,6 +16,8 @@ class aight(object):
 
 """functions and variables"""
 
+def setup():
+    pass
 
 """main"""
 
