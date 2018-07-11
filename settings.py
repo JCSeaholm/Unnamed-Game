@@ -1,17 +1,23 @@
-#provides OS info (screen size)
-import Tkinter
 #allows user's settings to be saved in a JSON file to be retrieved later
 import json
 
-#the default screen width and height are determined by the actual screen's dimensions
-root = Tkinter.Tk()
-screenWidth = root.winfo_screenwidth()
-screenHeight = root.winfo_screenheight()
-
 #use a JSON file to make it easier to save settings between sessions
-userSettingsFile = open('userSettings.json')
-userSettings = json.load(userSettings)
+userSettingsFile = open('userSettings.json', 'r')
+userSettings = json.load(userSettingsFile)
 
-#I'll have to mess with this, never used JSON before
-userSetWidth = userSettings.width
-userSetHeight = userSettings.height
+#grabs the relevant data from the user input file
+userSetWidth = userSettings["width"]
+userSetHeight = userSettings["height"]
+
+#does the user want to change a setting? Use these.
+def setWidth(width):
+    userSettingsFile = open('userSettings.json', 'w')
+    userSettings["width"] = width
+    json.dump(userSettings, userSettingsFile)
+    userSettingsFile.close()
+
+def setHeight(height):
+    userSettingsFile = open('userSettings.json', 'w')
+    userSettings["height"] = height
+    json.dump(userSettings, userSettingsFile)
+    userSettingsFile.close()
