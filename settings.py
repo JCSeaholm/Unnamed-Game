@@ -1,10 +1,10 @@
 #provides OS info (screen size)
-import Tkinter
+import tkinter
 #allows user's settings to be saved in a JSON file to be retrieved later
 import json
 
 #the default screen width and height are determined by the actual screen's dimensions
-root = Tkinter.Tk()
+root = tkinter.tk()
 screenWidth = root.winfo_screenwidth()
 screenHeight = root.winfo_screenheight()
 
