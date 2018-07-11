@@ -8,7 +8,7 @@ import sys
 import settings as s
 
 pygame.init()
-#idk what a python file should look like so yeh
+#idk what a python file should look like so yeh kkk
 
 """classes"""
 
