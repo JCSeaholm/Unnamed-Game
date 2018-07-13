@@ -8,24 +8,16 @@ import sys
 import settings as s
 
 pygame.init()
-#idk what a python file should look like so yeh
-
-"""classes"""
 
 class aight(object):
     pass
-
-"""functions and variables"""
 
 #Use pygame.FULLSCREEN for fullscreen
 pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
 
 def changeWindowSize(width, height):
-    s.setWidth(width)
-    s.setHeight(height)
+    s.setDimensions(width, height)
     pygame.display.set_mode((width, height))
-
-"""main"""
 
 def main():
     while 1:
