@@ -10,21 +10,31 @@ import settings as s
 pygame.init()
 
 #object to hold information about a player
+#will later turn this into the base class for some polymorphism
 class Player(object):
-    def __init__(self, pos_x, pos_y):
-        self.pos_x = pos_x
-        self.pos_y = pos_y
+    def __init__(self):
+        #loads an image onto an object,
+        #convert is used for consistency between the display and the surface
+        self.image = pygame.image.load("placeholder_player.png").convert()
+        #pygame .get_rect() will create an object for us holding the rect coordinates of the image
+        self.coord = self.image.get_rect()
 
-    def changePosX(self, pos_x):
-        self.pos_x = pos_x
+        self.coord.x = 200
+        self.coord.y = 200
 
-    def changePosY(self, pos_y):
-        self.pos_y = pos_y
+        velocity = 1
+
+    #function used to create movement for the player, kinda like a vector unit
+    def movement(self, xDirect, yDirect):
+        self.rect.x += xDirect*self.velocity
+        self.rect.y += yDirect*self.velocity
 
 def setup():
-    pass
+    player = Player()
+    #probably will return more stuff later
+    return player
 
-def update():
+def update(surfaces):
     pass
 
 def changeWindowSize(width, height, gameWindow):
@@ -32,7 +42,7 @@ def changeWindowSize(width, height, gameWindow):
     s.setDimensions(width, height)
     gameWindow = pygame.display.set_mode((width, height))
 
-def main():
+def main( setup() ):
     #Use pygame.FULLSCREEN for fullscreen
     #object for the window
     gameWindow = pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
@@ -44,7 +54,17 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        #
+        with currentKey as pygame.key.get_pressed():
+            if currentKey[pygame.K_RIGHT]:
+                player.movement(1,0)
+            if currentKey[pygame.K_LEFT]:
+                player.movement(-1,0)
+            if currentKey[pygame.K_UP]:
+                player.movement(0,-1)
+            if currentKey[pygame.K_DOWN]:
+                player.movement(0,1)
+
+        update(surface_to_update)
 main()
 
 #we don't need these, but they're there for safety
