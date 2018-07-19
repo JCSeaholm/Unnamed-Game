@@ -9,16 +9,22 @@ import settings as s
 
 pygame.init()
 
+#object to hold information about a player
 class Player(object):
-    def __init__(self, position_x, position_y):
-        self.position_x = position_x
-        self.position_y = position_x
-    def changePosX(self):
-        pass
-    def changePosY(self):
-        pass
+    def __init__(self, pos_x, pos_y):
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+
+    def changePosX(self, pos_x):
+        self.pos_x = pos_x
+
+    def changePosY(self, pos_y):
+        self.pos_y = pos_y
 
 def setup():
+    pass
+
+def update():
     pass
 
 def changeWindowSize(width, height, gameWindow):
@@ -28,14 +34,16 @@ def changeWindowSize(width, height, gameWindow):
 
 def main():
     #Use pygame.FULLSCREEN for fullscreen
+    #object for the window
     gameWindow = pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
+    #a list to hold the surfaces/rectangles that will need to be updated
+    surface_to_update = []
 
     while 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
         #
 main()
 
