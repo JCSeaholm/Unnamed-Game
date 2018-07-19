@@ -9,23 +9,34 @@ import settings as s
 
 pygame.init()
 
-class aight(object):
+class Player(object):
+    def __init__(self, position_x, position_y):
+        self.position_x = position_x
+        self.position_y = position_x
+    def changePosX(self):
+        pass
+    def changePosY(self):
+        pass
+
+def setup():
     pass
 
-#Use pygame.FULLSCREEN for fullscreen
-pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
-
-def changeWindowSize(width, height):
+def changeWindowSize(width, height, gameWindow):
+    #maybe add in stuff to check for aspect ratio
     s.setDimensions(width, height)
-    pygame.display.set_mode((width, height))
+    gameWindow = pygame.display.set_mode((width, height))
 
 def main():
+    #Use pygame.FULLSCREEN for fullscreen
+    gameWindow = pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
+
     while 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
+        #
 main()
 
 #we don't need these, but they're there for safety
