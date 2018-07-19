@@ -54,6 +54,7 @@ def main():
                 pygame.quit()
                 sys.exit()
 
+        #deteting keys and changing the coord of the player respectively
         currentKey = pygame.key.get_pressed()
         if currentKey[pygame.K_RIGHT]:
             player.movement(1,0)
@@ -64,6 +65,7 @@ def main():
         if currentKey[pygame.K_DOWN]:
             player.movement(0,1)
 
+        #will want to use different technique to update the screen, this is too slow
         gameWindow.blit(player.image, (player.coord.x, player.coord.y))
         pygame.display.update()
 main()
