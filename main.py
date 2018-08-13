@@ -22,12 +22,15 @@ class Player(object):
         self.coord.x = 200
         self.coord.y = 200
 
+        #variables to hold the values for velocity and acceleration
         self.velocity_x = 1
         self.velocity_y = .5
-        self.max_momentum = 2
-        self.accel_amt = 2
-        self.accel_change = .1
+        #the max that the postx and posty can reach
+        self.max_momentum = 3
+        #amt that the acceleration changes by per key event
+        self.accel_change = .01
 
+        #holds the amt of acceleration to be added to a movement
         self.postx = 0
         self.posty = 0
 
@@ -37,16 +40,18 @@ class Player(object):
     def move(self, xDirect, yDirect):
         self.moved = True
 
-        if self.coord.x == 0:
-            if self.postx < 0 or self.postx > 0:
-                self.postx *= -1
+        if self.postx > self.max_momentum:
+            self.postx = self.max_momentum
+        elif self.postx < -self.max_momentum:
+            self.postx = -self.max_momentum
 
-        if self.coord.y == 0:
-            if self.posty < 0 or self.posty > 0:
-                self.posty *= -1
+        if self.posty > self.max_momentum:
+            self.posty = self.max_momentum
+        elif self.posty < -self.max_momentum:
+            self.posty = -self.max_momentum
 
-        self.coord.x += xDirect*self.velocity_x + self.postx
-        self.coord.y += yDirect*self.velocity_y + self.posty
+        self.coord.x += xDirect*self.velocity_x + (self.postx*abs(self.postx))
+        self.coord.y += yDirect*self.velocity_y + (self.posty*abs(self.posty))
         self.postx += self.accel_change*(xDirect)
         self.posty += self.accel_change*(yDirect)
 
@@ -64,6 +69,8 @@ class Player(object):
 
         if self.moved == False:
             self.move(0,0)
+
+            #while the player doesn't hold any key, acceleration approaches 0
             if self.postx < 0:
                 self.postx += self.accel_change
             elif self.postx > 0:
