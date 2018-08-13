@@ -10,7 +10,7 @@ with open('userSettings.json', 'r+') as file:
     if os.stat('userSettings.json').st_size == 0:
         #creates a new dictionary with default 16:9 width & height
         settings = {'dimensions': {'width': 1280, 'height': 720} }
-        #with r+, file write/read position needs to be reset
+        #with r+, file write/read position needs to be reset i think
         file.seek(0)
         #dumps the dict into the json file, with 2 indent for better formatting
         json.dump(settings, file, indent=2)

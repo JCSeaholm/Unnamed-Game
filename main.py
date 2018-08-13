@@ -15,21 +15,64 @@ class Player(object):
     def __init__(self):
         #loads an image onto an object,
         #convert is used for consistency between the display and the surface
-        self.image = pygame.image.load("placeholder_player.png").convert()
+        self.image = pygame.transform.scale(pygame.image.load("placeholder_player.png").convert(), (100, 100))
         #pygame .get_rect() will create an object for us holding the rect coordinates of the image
         self.coord = self.image.get_rect()
 
         self.coord.x = 200
         self.coord.y = 200
 
-        self.velocity = 1
+        self.velocity_x = 1
+        self.velocity_y = .5
+        self.max_momentum = 2
+        self.accel_amt = 2
+        self.accel_change = .1
+
+        self.postx = 0
+        self.posty = 0
+
         self.moved = False
 
     #function used to create movement for the player, kinda like a vector unit
-    def movement(self, xDirect, yDirect):
+    def move(self, xDirect, yDirect):
         self.moved = True
-        self.coord.x += xDirect*self.velocity
-        self.coord.y += yDirect*self.velocity
+
+        if self.coord.x == 0:
+            if self.postx < 0 or self.postx > 0:
+                self.postx *= -1
+
+        if self.coord.y == 0:
+            if self.posty < 0 or self.posty > 0:
+                self.posty *= -1
+
+        self.coord.x += xDirect*self.velocity_x + self.postx
+        self.coord.y += yDirect*self.velocity_y + self.posty
+        self.postx += self.accel_change*(xDirect)
+        self.posty += self.accel_change*(yDirect)
+
+    def movement(self, currentKey):
+        self.moved = False
+
+        if currentKey[pygame.K_RIGHT]:
+            self.move(1, 0)
+        if currentKey[pygame.K_LEFT]:
+            self.move(-1, 0)
+        if currentKey[pygame.K_UP]:
+            self.move(0, -1)
+        if currentKey[pygame.K_DOWN]:
+            self.move(0, 1)
+
+        if self.moved == False:
+            self.move(0,0)
+            if self.postx < 0:
+                self.postx += self.accel_change
+            elif self.postx > 0:
+                self.postx -= self.accel_change
+
+            if self.posty < 0:
+                self.posty += self.accel_change
+            elif self.posty > 0:
+                self.posty -= self.accel_change
 
 def setup():
     pass
@@ -42,34 +85,29 @@ def changeWindowSize(width, height, gameWindow):
     s.setDimensions(width, height)
     gameWindow = pygame.display.set_mode((width, height))
 
-def main():
-    #Use pygame.FULLSCREEN for fullscreen
-    #object for the window
-    gameWindow = pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
-    player = Player()
 
-    while 1:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+#Use pygame.FULLSCREEN for fullscreen
+#object for the window
+gameWindow = pygame.display.set_mode((s.userSetWidth, s.userSetWidth))
+entities_to_update = []
+player = Player()
 
-        #deteting keys and changing the coord of the player respectively
-        currentKey = pygame.key.get_pressed()
-        if currentKey[pygame.K_RIGHT]:
-            player.movement(1,0)
-        if currentKey[pygame.K_LEFT]:
-            player.movement(-1,0)
-        if currentKey[pygame.K_UP]:
-            player.movement(0,-1)
-        if currentKey[pygame.K_DOWN]:
-            player.movement(0,1)
+while 1:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    
+    #sends key pressed object or dict (idk) to the movement function which handles the player movement
+    #turned movement into a method so it can be used possibly with an array of Player base objects
+    player.movement(pygame.key.get_pressed());
 
-        #will want to use different technique to update the screen, this is too slow
-        gameWindow.blit(player.image, (player.coord.x, player.coord.y))
-        pygame.display.update()
-main()
+
+    #will want to use different technique to update the screen, this is too slow
+    gameWindow.blit(player.image, (player.coord.x, player.coord.y))
+    pygame.display.update()
 
 #we don't need these, but they're there for safety
+#there are some errors whenever you exit the window, maybe it's these
 pygame.quit()
-sys.exit()
+#sys.exit()
